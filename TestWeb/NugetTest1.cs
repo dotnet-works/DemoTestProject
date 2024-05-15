@@ -6,9 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Allure.NUnit;
+using System.Collections;
 
-namespace TestProjectExample1.TestWeb
+namespace TestWeb
 {
+    
+
     [AllureNUnit]
     [TestFixture]
     public class NugetTest1
@@ -17,10 +21,15 @@ namespace TestProjectExample1.TestWeb
         string baseURL = "https://www.google.com/";
         int _IMPLICIT_WAIT = 15;
 
+        Func<IList<IWebElement> ,IList<string>>? getEleTextList;
+
         [OneTimeSetUp]
 
         public void InitOneTimeSetUp()
         {
+            
+            
+
             ChromeOptions options = new ChromeOptions();
 
             driver = new ChromeDriver(options);
@@ -56,6 +65,25 @@ namespace TestProjectExample1.TestWeb
             _toolsBTN.Click();
             string _ResultText = _ResultStat.Text;
             Console.WriteLine($"Result: {_ResultText}");
+
+           //getEleTextList = GetElementList;
+           
+           IList<string> eText = GetElementList(driver.FindElements(By.XPath("//h3")));
+           
+
+
+        }
+
+
+        public static IList<string> GetElementList(IList<IWebElement> eList)
+        {
+            List<string> allHeadingText = new List<string>();
+            foreach (IWebElement e in eList)
+            {
+                Console.WriteLine($"Text: {e.Text}");
+                allHeadingText.Add(e.Text);
+            }
+            return allHeadingText;
         }
 
     }
@@ -63,7 +91,3 @@ namespace TestProjectExample1.TestWeb
     
     
     
-    
-    
-    }
-}

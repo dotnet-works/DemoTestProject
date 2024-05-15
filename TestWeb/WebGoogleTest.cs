@@ -44,7 +44,7 @@ namespace TestWeb
 
         [Test]
         [AllureStep("simple google search")]
-        public void Test1()
+        public void TestGoogle1()
         {
             IWebElement _searchBOX = driver.FindElement(By.Name("q"));
             _searchBOX.Click();
@@ -54,7 +54,7 @@ namespace TestWeb
 
         [Test]
         [AllureStep("Analysis of search result")]
-        public void Test2()
+        public void TestResult2()
         {
             IWebElement _toolsBTN = driver.FindElement(By.Id("hdtb-tls"));
             IWebElement _ResultStat = driver.FindElement(By.Id("result-stats"));
